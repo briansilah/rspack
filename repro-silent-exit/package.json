@@ -1,0 +1,16 @@
+{
+  "name": "repro-silent-exit",
+  "private": true,
+  "scripts": {
+    "build:a": "rspack --config rspack.config.a.mjs --mode production",
+    "build:b": "rspack --config rspack.config.b.mjs --mode production",
+    "build:c": "rspack --config rspack.config.c.mjs --mode production",
+    "build:concurrent": "concurrently --kill-others-on-fail \"npm run build:a\" \"npm run build:b\" \"npm run build:c\"",
+    "repro": "node trigger-sigbus.mjs"
+  },
+  "devDependencies": {
+    "@rspack/cli": "latest",
+    "@rspack/core": "latest",
+    "concurrently": "^8.2.2"
+  }
+}
